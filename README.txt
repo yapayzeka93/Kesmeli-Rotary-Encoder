@@ -23,4 +23,7 @@ A fazının bit değeri ile B fazının bit değerini yanyana koyacak olursak.
 3. Adım     1        1         3       2      1 0     A'=B     B'= A özel veya B
 4. Adım     0        1         1       3      1 1     A'=B     B'= A özel veya B
 
+Bu durumda 
+byte konum;
+konum = ((a^b)|b<<1); Burada konumumuzu 0. 1. 2. 3. olarak tesbit edilecektir.
 
