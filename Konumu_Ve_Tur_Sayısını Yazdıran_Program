@@ -1,0 +1,50 @@
+byte konum_gecmis=0;
+int Tur_Sayisi=0;
+byte Motor=1; // Motor değişkenin 1 olması motorrun sistemi ileri yönde dönderdiğini 0 olması motorun sistemi geri yönde dönderdiğini göstermektedir.
+void setup() {
+    Serial.begin(115200); // Haberleşme hızı girildi
+  pinMode(20, INPUT_PULLUP); //A fazı 22 numaralı pine baglı ve pin başlangıç olarak pozitif
+  pinMode(18, INPUT_PULLUP); //B fazı 18 numaralı pine baglı ve pin başlangıç olarak pozitif 
+}
+
+void loop() {
+  byte a=digitalRead(20);
+  byte b=digitalRead(18);
+  byte konum;
+konum = ((a^b)|b<<1);
+if(konum!=konum_gecmis){
+  switch (konum) {
+  case 0:
+         if(konum_gecmis==1){Tur_Sayisi++;}
+    else if(konum_gecmis==3){Tur_Sayisi--;}
+    //ekstrem durum iki adım birden atlamış sistem 
+    else if(konum_gecmis==2){    if(Motor==1){Tur_Sayisi=Tur_Sayisi+2;} 
+                            else if(Motor==0){Tur_Sayisi=Tur_Sayisi-2;}}
+    break;
+  case 1:
+         if(konum_gecmis==2){Tur_Sayisi++;}
+    else if(konum_gecmis==0){Tur_Sayisi--;}
+    
+    else if(konum_gecmis==3){    if(Motor==1){Tur_Sayisi=Tur_Sayisi+2;} 
+                            else if(Motor==0){Tur_Sayisi=Tur_Sayisi-2;}}
+    break;
+     case 2:
+         if(konum_gecmis==3){Tur_Sayisi++;}
+    else if(konum_gecmis==1){Tur_Sayisi--;}
+    
+    else if(konum_gecmis==0){    if(Motor==1){Tur_Sayisi=Tur_Sayisi+2;} 
+                            else if(Motor==0){Tur_Sayisi=Tur_Sayisi-2;}}
+    break;
+  case 3:
+         if(konum_gecmis==0){Tur_Sayisi++;}
+    else if(konum_gecmis==2){Tur_Sayisi--;}
+    
+    else if(konum_gecmis==1){    if(Motor==1){Tur_Sayisi=Tur_Sayisi+2;} 
+                            else if(Motor==0){Tur_Sayisi=Tur_Sayisi-2;}}
+    break;
+   
+}
+  konum_gecmis=konum; 
+Serial.print("Adim_Konumu="); Serial.println(konum);
+Serial.print("Tur_Sayisi");   Serial.println(Tur_Sayisi);}
+}
