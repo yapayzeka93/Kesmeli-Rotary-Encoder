@@ -1,0 +1,14 @@
+byte konum_gecmis=0;
+void setup() {
+    Serial.begin(115200); // Haberleşme hızı girildi
+  pinMode(20, INPUT_PULLUP); //A fazı 22 numaralı pine baglı ve pin başlangıç olarak pozitif
+  pinMode(18, INPUT_PULLUP); //B fazı 18 numaralı pine baglı ve pin başlangıç olarak pozitif 
+}
+
+void loop() {
+  byte a=digitalRead(20);
+  byte b=digitalRead(18);
+  byte konum;
+konum = ((a^b)|b<<1);
+if(konum!=konum_gecmis){konum_old=konum; Serial.println(konum);}
+}
