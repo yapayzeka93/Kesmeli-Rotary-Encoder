@@ -10,5 +10,5 @@ void loop() {
   byte b=digitalRead(18);
   byte konum;
 konum = ((a^b)|b<<1);
-if(konum!=konum_gecmis){konum_old=konum; Serial.println(konum);}
+if(konum!=konum_gecmis){konum_gecmis=konum; Serial.print("Adim_Konumu="); Serial.println(konum);}
 }
